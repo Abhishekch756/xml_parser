@@ -13,7 +13,6 @@ dotenv.config();
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 
-// 👇️ "/home/john/Desktop/javascript"
 const __dirname = path.dirname(__filename);
 
 const options = {
@@ -40,8 +39,7 @@ passport.use(new GitHubStrategy({
     clientSecret: process.env.clientSecret,
     callbackURL: 'https://localhost:5500/auth/github/callback'
 }, (accessToken, refreshToken, profile, done) => {
-    // This is where you typically find or create a user in your database
-    // For demonstration purposes, we'll simply pass the profile to done()
+
     profile.accessToken = accessToken;
     return done(null, profile);
 }));
@@ -56,7 +54,6 @@ passport.deserializeUser((obj, done) => {
     done(null, obj);
 });
 
-// Routes
 app.get('/', (req, res) => {
     res.send('Home Page');
 });
@@ -68,12 +65,10 @@ app.get('/auth/github', passport.authenticate('github'));
 app.get('/auth/github/callback',
     passport.authenticate('github', { failureRedirect: '/login' }),
     (req, res) => {
-        // Successful authentication, redirect home.
         res.redirect('/profile');
     }
 );
 
-// Route to display user profile after authentication
 app.get('/profile',async (req, res) => {
     const ans=[];
     try {
@@ -116,7 +111,7 @@ async function selectRepository(repositories) {
     repositories.forEach((repo, index) => {
         console.log(`${index + 1}. ${repo.full_name}`);
     });
-    const selectedRepoIndex =  11; // Enter the index of the repository you want to select
+    const selectedRepoIndex =  Math.floor(Math.random() * (repositories.length)); // Enter the index of the repository you want to select
     return repositories[selectedRepoIndex];
 }
 
