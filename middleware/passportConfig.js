@@ -7,7 +7,7 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/github/callback",
+      callbackURL: "https://localhost:3000/auth/github/callback",
     },
     (accessToken, refreshToken, profile, done) => {
       // Save the access token in the user object
