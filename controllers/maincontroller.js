@@ -47,15 +47,15 @@ exports.home = async (req, res) => {
       const template = fs.readFileSync("./public/index.html", "utf8");
 
       // Create HTML for logged-in user with hyperlinked repository names and URLs
-      const repoListHtml = repositories
+      const repositories_list = repositories
         .map(
           (repo) =>
             `<li><a href="#" onclick="fetchAndDisplayDependencies('${repo.name}', '${accessToken}', '${username}')">${repo.name}</a> </li>`
         )
         .join("");
 
-      // Replace {repoListHtml} in the template with the actual content
-      const renderedHtml = template.replace("{repoListHtml}", repoListHtml);
+      // Replace {repositories_list} in the template with the actual content
+      const renderedHtml = template.replace("{repositories_list}", repositories_list);
 
       res.send(renderedHtml);
     } catch (error) {
