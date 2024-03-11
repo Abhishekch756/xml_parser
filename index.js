@@ -2,20 +2,14 @@ const express = require("express");
 const passport = require("passport");
 const fs= require('fs');
 const path= require('path');
-const session = require('express-session');
-const fileURLToPath = require('url');
 const session = require("express-session");
 const authRoutes = require('./routes/authRoutes');
 const homeRoutes = require('./routes/homeRoutes');
 require("dotenv").config();
 require('./middleware/passportConfig');
 
-
 const app = express();
 const port = 3000;
-const __filename = fileURLToPath(import.meta.url);
-
-const __dirname = path.dirname(__filename);
 
 const options = {
     key: fs.readFileSync(path.join(__dirname,'cert','key.pem')),
