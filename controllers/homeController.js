@@ -1,6 +1,16 @@
 const axios = require("axios");
 // const githubService = require("../services/githubService");
 const fs = require("fs");
+const passport = require("passport");
+
+exports.login = (req, res) => {
+  res.send('Login with GitHub: <a href="/auth/github">Login</a>');
+};
+
+exports.githubCallback = passport.authenticate("github", { failureRedirect: "/" }),
+(req, res) => {
+  res.redirect("/");
+};
 
 
 getUserRepositories = async (accessToken) => {
@@ -35,7 +45,7 @@ exports.home = async (req, res) => {
         await getUserRepositories(accessToken);
 
       // Read the template file
-      const template = fs.readFileSync("./public/template.html", "utf8");
+      const template = fs.readFileSync("./public/index.html", "utf8");
 
       // Create HTML for logged-in user with hyperlinked repository names and URLs
       const repoListHtml = repositories
