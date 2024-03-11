@@ -1,18 +1,11 @@
-<!-- template.html -->
+
 <html>
   <head>
-    <!-- Include Axios from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    
   </head>
-  <body>
-    <p>Logged in Successfully. User's repositories:</p>
-    <p>Click on the repo you want to parse</p>
+  <body> 
     <ul>{repoListHtml}</ul>
-
-    <!-- Container to display parsed dependencies -->
     <div id="dependenciesContainer"></div>
-
-    <script src="../fetchDep.js"></script>
+    <script src="../dep.js"></script>
   </body>
 </html>
